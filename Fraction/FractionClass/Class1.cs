@@ -3,6 +3,38 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace FractionClass
 {
+    internal class Utilities
+    {
+        internal static int GCD(int a, int b)
+        {
+            /*
+             * The logic of this algorithm is to keep replacing the greatest number
+             * with the remainder of the division of itself with the other one
+             * until one becomes zero.
+             *
+             * Example:
+             * a: 8;    b:6;    ->  a = a % b = 8 % 6 = 2
+             * a: 2;    b:6;    ->  b = b % a = 6 % 2 = 0
+             * a: 2;    b:0;    ->  return a | b = 2 | 0 = 2
+             *
+             * If a and b have GCD = 1, they will keep decreasing until one of them becomes 1 and the other one becomes 0
+             */
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                {
+                    a %= b;
+                }
+                else
+                {
+                    b %= a;
+                }
+            }
+
+            return a | b; // At this point one of these two is equals 0, so I will return the one that isn't zero using bitwise OR operator
+        }
+    }
+
     public class Fraction
     {
         public int Numerator { get; } // Numerator can be any integer
@@ -15,23 +47,17 @@ namespace FractionClass
                 throw new ArgumentException("Denominator cannot be zero");
             }
 
-            var sign = 1;
+            var sign = denominator < 0 ? -1 : 1; // If denominator is negative, I will change sign of both numbers
+            /*
+             * Example:
+             *  n: -1;  d: 1;   s = 1   -> n and d don't change
+             *  n: 1;   d: -1   s = -1  -> n becomes negative and d becomes positive
+             *  n: -1;  d: -1   s = -1  -> n and d becomes positive
+             */
+            var gcd = Utilities.GCD(Math.Abs(numerator), Math.Abs(denominator));
 
-            if (numerator == 0) // Any fraction with numerator = 0, will have denominator = 1.
-            {
-                denominator = 1;
-            }
-            else
-            {
-                sign = (numerator * denominator) > 0 ? 1 : -1; // Keep track of the sign
-                // convert numerator and denominator to positive
-                numerator = Math.Abs(numerator);
-                denominator = Math.Abs(denominator);
-                Normalize(ref numerator, ref denominator);
-            }
-
-            this.Numerator = numerator * sign;
-            this.Denominator = denominator;
+            this.Numerator = numerator * sign / gcd;
+            this.Denominator = denominator * sign / gcd;
         }
 
         public static Fraction operator +(Fraction a, Fraction b)
@@ -63,46 +89,6 @@ namespace FractionClass
             }
 
             return new Fraction((a.Numerator * b.Denominator), (b.Numerator * a.Denominator));
-        }
-
-        private static void Normalize(ref int numerator, ref int denominator)
-        {
-            var gcd = CalculateGcd(numerator, denominator);
-            while (gcd != 1)
-            {
-                numerator /= gcd;
-                denominator /= gcd;
-                gcd = CalculateGcd(numerator, denominator);
-            }
-        }
-
-        private static int
-            CalculateGcd(int numerator, int denominator) // I know for sure that both arguments are positive
-        {
-            /*
-             * Euclidean algorithm
-             * a = Max(numerator, denominator)
-             * b = what's left
-             * find quotient and remainder so that:
-             *  a = quotient * b + remainder
-             * if remainder = 0 then b is the GCD
-             */
-
-            var a = Math.Max(numerator, denominator);
-            var b = Math.Min(numerator, denominator);
-            var remainder = -1;
-
-            while (remainder != 0)
-            {
-                var quotient =
-                    a / b; // Instead of looping until I find the correct quotient, I can just divide and keep the integer
-                remainder = a - (quotient * b);
-                // If remainder != 0 then I have to repeat with the next pair of number (b, remainder)
-                a = b;
-                b = remainder!;
-            }
-
-            return a;
         }
 
         public override string ToString()
