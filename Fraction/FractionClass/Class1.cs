@@ -117,13 +117,25 @@ namespace FractionClass
 
         public override bool Equals(object? obj)
         {
-            var other = obj as Fraction;
+            if (obj is not Fraction other) return false;
             return Numerator.Equals(other.Numerator) && Denominator.Equals(other.Denominator);
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() => (Numerator, Denominator).GetHashCode();
+
+        public static implicit operator Fraction(int numerator)
         {
-            return (Numerator, Denominator).GetHashCode();
+            return new Fraction(numerator, 1);
+        }
+
+        public static explicit operator int(Fraction fraction)
+        {
+            if (fraction.Denominator != 1)
+            {
+                throw new ArgumentException("Fraction denominator must be 1");
+            }
+
+            return fraction.Numerator;
         }
     }
 }
