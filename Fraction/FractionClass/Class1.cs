@@ -1,4 +1,5 @@
 ﻿    using System.Runtime.InteropServices;
+    using Microsoft.VisualBasic.CompilerServices;
 
     namespace FractionClass
     {
@@ -9,12 +10,40 @@
 
             public Fraction(int numerator, int denominator)
             {
-                if (denominator <= 0)
+                if (denominator == 0)
                 {
-                    throw new ArgumentException("Denominator must be positive");
+                    throw new ArgumentException("Denominator cannot be zero");
 
                 }
 
+                var sign = 1;
+
+                if (numerator == 0) // Any fraction with numerator = 0, will have denominator = 1.
+                {
+                    denominator = 1;
+                }
+                else
+                {
+                    sign = (numerator * denominator) > 0 ? 1 : -1; // Keep track of the sign
+                    // convert numerator and denominator to positive
+                    numerator = Math.Abs(numerator);
+                    denominator = Math.Abs(denominator);
+                    Normalize(ref numerator, ref denominator);
+                }
+
+                this.Numerator = numerator * sign;
+                this.Denominator = denominator;
+            }
+
+            public static Fraction operator +(Fraction a, Fraction b)
+            {
+                // x1/y1+x2/y2=((x1*y2)+(x2*y1))/(y1*y2)
+                return new Fraction((a.Numerator * b.Denominator) + (b.Numerator * a.Denominator),
+                    (a.Denominator * b.Denominator));
+            }
+
+        private static void Normalize(ref int numerator, ref int denominator)
+            {
                 var gcd = CalculateGcd(numerator, denominator);
                 while (gcd != 1)
                 {
@@ -22,12 +51,9 @@
                     denominator /= gcd;
                     gcd = CalculateGcd(numerator, denominator);
                 }
-
-                this.Numerator = numerator;
-                this.Denominator = denominator;
             }
 
-            private static int CalculateGcd(int numerator, int denominator)
+            private static int CalculateGcd(int numerator, int denominator) // I know for sure that both arguments are positive
             {
                 /*
                  * Euclidean algorithm
@@ -44,13 +70,15 @@
 
                 while (remainder != 0)
                 {
-                    int quotient = a / b; // Instead of looping until I find the correct quotient, I can just divide and keep the integer
+                    var quotient = a / b; // Instead of looping until I find the correct quotient, I can just divide and keep the integer
                     remainder = a - (quotient * b);
-                    a = b; // To keep looking for the GCD on the next numbers which are b and the remainder
+                    // If remainder != 0 then I have to repeat with the next pair of number (b, remainder)
+                    a = b;
                     b = remainder!;
                 }
 
                 return a;
             }
+
         }
     }
