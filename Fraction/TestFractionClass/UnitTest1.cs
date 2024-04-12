@@ -65,11 +65,38 @@ namespace TestFractionClass
         [TestCase(1, 2, 1, 2, 1, 1)]
         [TestCase(-1, 1, -1, 1, -2, 1)]
         [TestCase(-4, 14, -21, 16, -179, 112)]
+        [TestCase(1, 3, 1, 4, 7, 12)]
+        [TestCase(-1, 2, -1, 3, -5, 6)]
+        [TestCase(3, 5, 2, 5, 1, 1)]
+        [TestCase(0, 1, 1, 2, 1, 2)]
+        [TestCase(1, 1, 2, 1, 3, 1)]
+        [TestCase(1, 3, -1, 3, 0, 1)]
         public void TestPlusOperator(int n1, int d1, int n2, int d2, int expectedN, int expectedD)
         {
             _fraction = new Fraction(n1, d1);
             _fraction2 = new Fraction(n2, d2);
             var retFraction = _fraction + _fraction2;
+
+            Assert.Multiple((() =>
+            {
+                Assert.That(retFraction.Numerator, Is.EqualTo(expectedN));
+                Assert.That(retFraction.Denominator, Is.EqualTo(expectedD));
+            }));
+        }
+
+        [TestCase(3, 4, 1, 4, 1, 2)]
+        [TestCase(5, 6, 1, 3, 1, 2)]
+        [TestCase(-1, 2, -1, 3, -1, 6)]
+        [TestCase(5, 4, 1, 4, 1, 1)]
+        [TestCase(1, 4, 5, 4, -1, 1)]
+        [TestCase(0, 1, 1, 2, -1, 2)]
+        [TestCase(0, 1, -2, 3, 2, 3)]
+        [TestCase(1, 3, 1, 3, 0, 1)]
+        public void TestMinusOperator(int n1, int d1, int n2, int d2, int expectedN, int expectedD)
+        {
+            _fraction = new Fraction(n1, d1);
+            _fraction2 = new Fraction(n2, d2);
+            var retFraction = _fraction - _fraction2;
 
             Assert.Multiple((() =>
             {

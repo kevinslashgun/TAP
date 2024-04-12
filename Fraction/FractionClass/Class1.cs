@@ -42,6 +42,13 @@
                     (a.Denominator * b.Denominator));
             }
 
+            public static Fraction operator -(Fraction a, Fraction b)
+            {
+                // x1/y1-x2/y2=((x1*y2)-(x2*y1))/(y1*y2)
+                return new Fraction((a.Numerator * b.Denominator) - (b.Numerator * a.Denominator),
+                    (a.Denominator * b.Denominator));
+            }
+
         private static void Normalize(ref int numerator, ref int denominator)
             {
                 var gcd = CalculateGcd(numerator, denominator);
