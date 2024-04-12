@@ -168,26 +168,27 @@ namespace TestFractionClass
             Assert.That(() => new Fraction(numerator, denominator).ToString(), Is.EqualTo(expectedString));
         }
 
-        [TestCase(1,2,2,4,true)]
+        [TestCase(1, 2, 2, 4, true)]
         [TestCase(1, 2, 1, 3, false)]
         [TestCase(-2, 1, -8, 4, true)]
         [TestCase(-1, 7, -2, 5, false)]
         [TestCase(0, 1, 0, 1, true)]
         public void TestEquals(int n1, int d1, int n2, int d2, bool expectedBool)
         {
-            Assert.That(() => new Fraction(n1, d1).Equals(new Fraction(n2,d2)), Is.EqualTo(expectedBool));
+            Assert.That(() => new Fraction(n1, d1).Equals(new Fraction(n2, d2)), Is.EqualTo(expectedBool));
         }
 
-        [TestCase(2,3)]
+        [TestCase(2, 3)]
         [TestCase(3, 2)]
         [TestCase(-2, 5)]
         [TestCase(-5, 2)]
         [TestCase(0, 1)]
         [TestCase(-11, 1)]
-        [TestCase(13,1)]
+        [TestCase(13, 1)]
         public void TestGetHashCode(int numerator, int denominator)
         {
-            Assert.That(() => new Fraction(numerator, denominator).GetHashCode(), Is.EqualTo((numerator,denominator).GetHashCode()));
+            Assert.That(() => new Fraction(numerator, denominator).GetHashCode(),
+                Is.EqualTo((numerator, denominator).GetHashCode()));
         }
     }
 }
