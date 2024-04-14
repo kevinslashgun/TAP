@@ -1,13 +1,13 @@
-## Progetti Universitari
+# Progetti Universitari
 
 Questo repository contiene una serie di progetti sviluppati durante il percorso universitario. I progetti sono principalmente incentrati sulla pratica e sperimentazione di concetti teorici appresi durante i corsi.
 
-### Progetto 1: Frazioni
+## Progetto 1: Frazioni
 
-#### Descrizione
+### Descrizione
 Il primo progetto si concentra sullo sviluppo di una classe `Fraction`, il cui scopo è rappresentare frazioni e implementare operazioni su di esse. L'implementazione segue l'approccio "test first", in cui per ogni funzionalità si definiscono prima i test, e successivamente si procede con l'implementazione.
 
-#### Specifiche
+### Specifiche
 La classe `Fraction` deve soddisfare i seguenti requisiti:
 - Proprietà in sola lettura per numeratore e denominatore.
 - Costruttore che inizializza l'oggetto con la forma normale della frazione.
@@ -17,15 +17,15 @@ La classe `Fraction` deve soddisfare i seguenti requisiti:
 - Conversione implicita da intero a frazione.
 - Conversione esplicita da frazione a intero, sollevando un'eccezione se il denominatore è diverso da 1.
 
-#### Parte 1: Operator Overloading (Esempio iniziale)
+### Parte 1: Operator Overloading (Esempio iniziale)
 Per cominciare, si definiscono i test per il costruttore, seguendo l'approccio "test first". Si parte con i seguenti casi corretti e scorretti, per garantire una corretta gestione degli input e dei casi limite.
 
-### Progetto 2: Custom-Attribute e Reflection
+## Progetto 2: Custom-Attribute e Reflection
 
-#### Descrizione
+### Descrizione
 Il secondo progetto si concentra sull'utilizzo di custom-attribute e reflection in C#. L'obiettivo è sviluppare un sistema in cui è possibile annotare metodi con attributi personalizzati e invocarli dinamicamente attraverso reflection.
 
-#### Specifiche
+### Specifiche
 Il progetto si articola in due versioni: una base e una avanzata. Nella versione base, si creano tre progetti in una solution:
 - Una console application `Executer`.
 - Una libreria di classi `MyAttribute` per definire un custom-attribute `ExecuteMe`.
