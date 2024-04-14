@@ -32,7 +32,7 @@ namespace MyLibrary
         [ExecuteMe(true)]
         public void M4(bool b)
         {
-            Console.WriteLine("M4 {0}",b ? "Bye bye!" : "Hello!");
+            Console.WriteLine("M4 {0}", b ? "Bye bye!" : "Hello!");
         }
 
         [ExecuteMe(typeof(object))]
@@ -41,7 +41,7 @@ namespace MyLibrary
             Console.WriteLine("M5 type = {0}", type.Name);
         }
 
-        [ExecuteMe(new[] {1, 2, 3})]
+        [ExecuteMe(new[] { 1, 2, 3 })]
         public void M6(int[] numbers)
         {
             Console.Write("M6 ");
@@ -56,6 +56,8 @@ namespace MyLibrary
     public class Class2
     {
         private int Number { get; }
+
+        [BuildMe(5)]
         public Class2(int number)
         {
             Number = number;
@@ -64,23 +66,13 @@ namespace MyLibrary
         [ExecuteMe]
         public void M1()
         {
-            Console.WriteLine(this.Number);
+            Console.WriteLine("M1 Number = {0}",this.Number);
         }
     }
 
     public class Class3
     {
         public int Number { get; init; } = 14;
-
-        //public Class3()
-        //{
-        //    Number = 14;
-        //}
-
-        //public Class3(int number)
-        //{
-        //    Number = number;
-        //}
 
         [ExecuteMe]
         public void M1()

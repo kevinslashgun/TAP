@@ -23,10 +23,27 @@ namespace Executor
                         {
                             foreach (ExecuteMeAttribute attribute in attributes.Cast<ExecuteMeAttribute>())
                             {
-                                //Use the Activator class to create the object, invoke the methods passin ad argument parameters of ExecuteMeAttribute
+                                //Use the Activator class to create the object, invoke the methods passing ad argument parameters of ExecuteMeAttribute
                                 try
                                 {
-                                    method.Invoke(Activator.CreateInstance(type), attribute.Parameters);
+                                    var constructors = type.GetConstructors();
+                                    foreach (var constructor in constructors)
+                                    {
+                                        object[] parameters =
+                                            constructor.GetCustomAttributes(typeof(BuildMeAttribute), false);
+                                        if (parameters.Length > 0)
+                                        {
+                                            foreach (BuildMeAttribute parameter in parameters.Cast<BuildMeAttribute>())
+                                            {
+                                                var instance = constructor.Invoke(parameter.Parameters);
+                                                method.Invoke(instance, attribute.Parameters);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            method.Invoke(Activator.CreateInstance(type), attribute.Parameters);
+                                        }
+                                    }
                                 }
                                 catch (TargetParameterCountException ex)
                                 {
