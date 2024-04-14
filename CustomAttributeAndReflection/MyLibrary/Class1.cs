@@ -41,7 +41,7 @@ namespace MyLibrary
             Console.WriteLine("M5 type = {0}", type.Name);
         }
 
-        [ExecuteMe(new int[] {1, 2, 3})]
+        [ExecuteMe(new[] {1, 2, 3})]
         public void M6(int[] numbers)
         {
             Console.Write("M6 ");
