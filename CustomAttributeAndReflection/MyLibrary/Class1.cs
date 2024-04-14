@@ -108,5 +108,19 @@ namespace MyLibrary
         {
             Console.WriteLine("M1024");
         }
+
+        [ExecuteMe("class3_instance")]
+        [ExecuteMe("")]
+        public void M2048(string objId)
+        {
+            Class3? c = GetObjectById(objId);
+            if (c != null) Console.WriteLine("M2048 c.number = {0}", c.Number);
+            else Console.WriteLine("2048 c = null");
+        }
+
+        private Class3? GetObjectById(string id)
+        {
+            return id.Equals("class3_instance") ? new Class3() : null;
+        }
     }
 }

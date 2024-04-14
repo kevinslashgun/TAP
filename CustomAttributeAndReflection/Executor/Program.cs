@@ -14,7 +14,8 @@ namespace Executor
             {
                 if (type.IsClass && !type.IsSubclassOf(typeof(Attribute))) // Need the second condition because GetTypes() returns also Attribute classes
                 {
-                    var methods = type.GetMethods(); // Get methods of that class 
+                    var methods = type.GetMethods(); // Get methods of that class
+                    Console.WriteLine(type.FullName);
                     foreach (var method in methods) // Now I want to call all those methods with their tagged custom attributes
                     {
                         object[] attributes = method.GetCustomAttributes(typeof(ExecuteMeAttribute), false); // Get the custom attributes of type ExecuteMeAttribute

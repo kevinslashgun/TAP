@@ -4,6 +4,7 @@
     public class ExecuteMeAttribute: Attribute
     {
         public object[] Parameters { get; } // ExecuteMe can have any type and number of parameters
+
         public ExecuteMeAttribute(params object[] parameters)
         {
             this.Parameters = parameters;
