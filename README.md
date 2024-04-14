@@ -1,49 +1,49 @@
-# Progetti Universitari
+# University Projects
 
-Questo repository contiene una serie di progetti sviluppati durante il percorso universitario. I progetti sono principalmente incentrati sulla pratica e sperimentazione di concetti teorici appresi durante i corsi.
+This repository contains a series of projects developed during the university journey. The projects primarily focus on the practical application and experimentation of theoretical concepts learned during courses.
 
-## Progetto 1: Frazioni
+## Project 1: Fractions
 
-### Descrizione
-Il primo progetto si concentra sullo sviluppo di una classe `Fraction`, il cui scopo è rappresentare frazioni e implementare operazioni su di esse. L'implementazione segue l'approccio "test first", in cui per ogni funzionalità si definiscono prima i test, e successivamente si procede con l'implementazione.
+### Description
+The first project focuses on the development of a `Fraction` class, aimed at representing fractions and implementing operations on them. The implementation follows the "test first" approach, where tests are defined for each functionality first, and then implementation follows.
 
-### Specifiche
-La classe `Fraction` deve soddisfare i seguenti requisiti:
-- Proprietà in sola lettura per numeratore e denominatore.
-- Costruttore che inizializza l'oggetto con la forma normale della frazione.
-- Implementazione degli operatori aritmetici (+, -, *, /) nella sintassi infissa.
-- Metodo `ToString` che restituisce la rappresentazione della frazione in forma normale.
-- Metodo `Equals` che verifica l'uguaglianza tra frazioni.
-- Conversione implicita da intero a frazione.
-- Conversione esplicita da frazione a intero, sollevando un'eccezione se il denominatore è diverso da 1.
+### Specifications
+The `Fraction` class must meet the following requirements:
+- Read-only properties for numerator and denominator.
+- Constructor that initializes the object with the normalized form of the fraction.
+- Implementation of arithmetic operators (+, -, *, /) in infix syntax.
+- `ToString` method that returns the representation of the fraction in normalized form.
+- `Equals` method that checks equality between fractions.
+- Implicit conversion from integer to fraction.
+- Explicit conversion from fraction to integer, raising an exception if the denominator is not 1.
 
-### Parte 1: Operator Overloading (Esempio iniziale)
-Per cominciare, si definiscono i test per il costruttore, seguendo l'approccio "test first". Si parte con i seguenti casi corretti e scorretti, per garantire una corretta gestione degli input e dei casi limite.
+### Part 1: Operator Overloading (Initial Example)
+To begin, tests are defined for the constructor, following the "test first" approach. We start with the following correct and incorrect cases to ensure proper handling of inputs and edge cases.
 
-## Progetto 2: Custom-Attribute e Reflection
+## Project 2: Custom-Attribute and Reflection
 
-### Descrizione
-Il secondo progetto si concentra sull'utilizzo di custom-attribute e reflection in C#. L'obiettivo è sviluppare un sistema in cui è possibile annotare metodi con attributi personalizzati e invocarli dinamicamente attraverso reflection.
+### Description
+The second project focuses on the use of custom attributes and reflection in C#. The goal is to develop a system where methods can be annotated with custom attributes and dynamically invoked through reflection.
 
-### Specifiche
-Il progetto si articola in due versioni: una base e una avanzata. Nella versione base, si creano tre progetti in una solution:
-- Una console application `Executer`.
-- Una libreria di classi `MyAttribute` per definire un custom-attribute `ExecuteMe`.
-- Una libreria di classi `MyLibrary` in cui definire classi con metodi annotati con `[ExecuteMe]`.
+### Specifications
+The project is divided into two versions: a base and an advanced one. In the base version, three projects are created in a solution:
+- A console application `Executer`.
+- A class library `MyAttribute` to define a custom attribute `ExecuteMe`.
+- A class library `MyLibrary` where classes with methods annotated with `[ExecuteMe]` are defined.
 
-### Versione Base
-1. Definire il custom-attribute `ExecuteMe` che può essere associato a metodi.
-2. Creare classi pubbliche in `MyLibrary` con metodi pubblici annotati con `[ExecuteMe]`.
-3. Utilizzare reflection in `Executer` per caricare la DLL di `MyLibrary` e invocare dinamicamente i metodi annotati.
+### Base Version
+1. Define the custom attribute `ExecuteMe` that can be associated with methods.
+2. Create public classes in `MyLibrary` with public methods annotated with `[ExecuteMe]`.
+3. Use reflection in `Executer` to load the DLL of `MyLibrary` and dynamically invoke the annotated methods.
 
-### Seconda Release
-1. Ottimizzare il riferimento a `MyLibrary` nell'`Executer`.
-2. Sperimentare con i valori e i tipi di argomenti per l'annotazione `ExecuteMe`.
-3. Gestire errori come l'assenza del costruttore di default e parametri errati nei metodi annotati.
+### Second Release
+1. Optimize the reference to `MyLibrary` in `Executer`.
+2. Experiment with the values and types of arguments for the `ExecuteMe` annotation.
+3. Handle errors such as the absence of the default constructor and incorrect parameters in annotated methods.
 
-### Possibili Miglioramenti
-- Gestire costruttori non di default e parametri opzionali nei metodi annotati.
-- Esplorare le interazioni tra custom-attribute, reflection e tipi di parametri.
+### Possible Improvements
+- Handle non-default constructors and optional parameters in annotated methods.
+- Explore interactions between custom attributes, reflection, and parameter types.
 
-## Contributi
-I contributi sono benvenuti tramite pull request. Per eventuali problemi o suggerimenti, non esitate a creare una nuova issue.
+## Contributions
+Contributions are welcome through pull requests. For any issues or suggestions, feel free to create a new issue.
