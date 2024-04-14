@@ -27,5 +27,86 @@ namespace MyLibrary
         {
             Console.WriteLine("M3 s1 = {0} s2 = {1}", s1, s2);
         }
+
+        [ExecuteMe(false)]
+        [ExecuteMe(true)]
+        public void M4(bool b)
+        {
+            Console.WriteLine("M4 {0}",b ? "Bye bye!" : "Hello!");
+        }
+
+        [ExecuteMe(typeof(object))]
+        public void M5(Type type)
+        {
+            Console.WriteLine("M5 type = {0}", type.Name);
+        }
+
+        [ExecuteMe(new int[] {1, 2, 3})]
+        public void M6(int[] numbers)
+        {
+            Console.Write("M6 ");
+            foreach (var number in numbers)
+            {
+                Console.Write("{0} ", number);
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public class Class2
+    {
+        private int Number { get; }
+        public Class2(int number)
+        {
+            Number = number;
+        }
+
+        [ExecuteMe]
+        public void M1()
+        {
+            Console.WriteLine(this.Number);
+        }
+    }
+
+    public class Class3
+    {
+        public int Number { get; init; } = 14;
+
+        //public Class3()
+        //{
+        //    Number = 14;
+        //}
+
+        //public Class3(int number)
+        //{
+        //    Number = number;
+        //}
+
+        [ExecuteMe]
+        public void M1()
+        {
+            Console.WriteLine(this.Number);
+        }
+    }
+
+    public class Class4
+    {
+        [ExecuteMe("fourteen")]
+        public void M1(int a)
+        {
+            Console.WriteLine("M1 number = {0}", a);
+        }
+
+        [ExecuteMe(true, false)]
+        public void M2(bool b)
+        {
+            Console.WriteLine("M2 b = {0}", b);
+        }
+
+        [ExecuteMe]
+        public void M1024()
+        {
+            Console.WriteLine("M1024");
+        }
     }
 }

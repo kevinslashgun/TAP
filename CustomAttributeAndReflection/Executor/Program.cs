@@ -7,7 +7,9 @@ namespace Executor
     {
         public static void Main()
         {
-            var assembly = Assembly.LoadFrom("MyLibrary.dll"); // Load the assembly from MyLibrary.dll
+            // Load the assembly from MyLibrary.dll
+            //var assembly = Assembly.LoadFrom("MyLibrary.dll"); // Using the project reference
+            var assembly = Assembly.LoadFrom("../../../../MyLibrary/bin/Debug/net7.0/MyLibrary.dll"); // Using the relative path of the .dll file
             foreach (var type in assembly.GetTypes()) // Now I get all the types inside the file MyLibrary.dll
             {
                 if (type.IsClass && !type.IsSubclassOf(typeof(Attribute))) // Need the second condition because GetTypes() returns also Attribute classes
@@ -20,8 +22,23 @@ namespace Executor
                         {
                             foreach (ExecuteMeAttribute attribute in attributes.Cast<ExecuteMeAttribute>())
                             {
-                                // Use the Activator class to create the object, invoke the methods passin ad argument parameters of ExecuteMeAttribute
-                                method.Invoke(Activator.CreateInstance(type), attribute.Parameters);
+                                //Use the Activator class to create the object, invoke the methods passin ad argument parameters of ExecuteMeAttribute
+                                try
+                                {
+                                    method.Invoke(Activator.CreateInstance(type), attribute.Parameters);
+                                }
+                                catch (TargetParameterCountException ex)
+                                {
+                                    Console.WriteLine($"[Exception in method: {method.Name}] [Message: {ex.Message}]");
+                                }
+                                catch (ArgumentException ex)
+                                {
+                                    Console.WriteLine($"[Exception in method: {method.Name}] [Message: {ex.Message}]");
+                                }
+                                catch (MissingMethodException ex)
+                                {
+                                    Console.WriteLine($"[Exception in class: {type.FullName}] [Message: {ex.Message}]");
+                                }
                             }
                         }
                     }
