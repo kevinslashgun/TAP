@@ -57,7 +57,7 @@ namespace MyLibrary
     {
         private int Number { get; }
 
-        [BuildMe(5)]
+        [BuildMe(101)]
         public Class2(int number)
         {
             Number = number;

@@ -9,7 +9,7 @@ namespace Executor
         {
             // Load the assembly from MyLibrary.dll
             //var assembly = Assembly.LoadFrom("MyLibrary.dll"); // Using the project reference
-            var assembly = Assembly.LoadFrom("../../../../MyLibrary/bin/Debug/net7.0/MyLibrary.dll"); // Using the relative path of the .dll file
+            var assembly = Assembly.LoadFrom("../../../../MyLibrary/bin/Debug/net7.0/MyLibrary.dll"); // Using the relative path of the .dll file, Note that if MyLibrary isn't build there's no file or file isn't updated
             foreach (var type in assembly.GetTypes()) // Now I get all the types inside the file MyLibrary.dll
             {
                 if (type.IsClass && !type.IsSubclassOf(typeof(Attribute))) // Need the second condition because GetTypes() returns also Attribute classes
@@ -31,6 +31,7 @@ namespace Executor
                                     {
                                         object[] parameters =
                                             constructor.GetCustomAttributes(typeof(BuildMeAttribute), false);
+                                        // Instead of using a BuildMeAttribute, I could ask the user to enter params to create the object
                                         if (parameters.Length > 0)
                                         {
                                             foreach (BuildMeAttribute parameter in parameters.Cast<BuildMeAttribute>())
